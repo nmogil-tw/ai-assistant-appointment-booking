@@ -10,7 +10,7 @@ A modular tool for deploying a Twilio AI Assistant with pre-configured tools for
 - Automated assistant creation with scheduling-focused personality
 - Pre-configured tools for appointment management:
   - Customer information lookup
-  - Call scheduling and booking
+  - Call scheduling and booking via Cal.com integration
   - Customer satisfaction surveys
   - Date and time management
   - Handoff to human agents
@@ -22,6 +22,7 @@ A modular tool for deploying a Twilio AI Assistant with pre-configured tools for
 - Twilio account with AI Assistant access (accept AI Assistants Terms & Conditions)
 - Twilio Account SID and Auth Token
 - Airtable account, [App ID](https://support.airtable.com/docs/finding-airtable-ids#finding-ids-in-the-airtable-api) and [API token](https://airtable.com/developers/web/guides/personal-access-tokens#creating-a-token)
+- Cal.com account and API key for appointment scheduling
 
 ## Project Structure
 
@@ -107,10 +108,11 @@ npm install
 ```bash
 cp .env.example .env
 # Edit .env and add your credentials:
-# TWILIO_ACCOUNT_SID=your_account_sid
-# TWILIO_AUTH_TOKEN=your_auth_token
-# AIRTABLE_API_KEY=your_airtable_api_key
-# AIRTABLE_BASE_ID=your_airtable_base_id
+TWILIO_ACCOUNT_SID=your_account_sid
+TWILIO_AUTH_TOKEN=your_auth_token
+AIRTABLE_API_KEY=your_airtable_api_key
+AIRTABLE_BASE_ID=your_airtable_base_id
+CAL_API_KEY=your_calcom_api_key
 ```
 :warning: **Ensure you accept the Terms and Conditions in the Twilio Console by visiting the AI Assistants page before running the script.**
 
@@ -224,7 +226,8 @@ The assistant uses several tool functions that need to be implemented:
 
 3. Book Call (`/tools/book-call`)
    - POST request
-   - Schedules calls with customers
+   - Schedules calls with customers using Cal.com API
+   - Creates a booking in your Cal.com calendar
    - Input schema:
      ```javascript
      {
