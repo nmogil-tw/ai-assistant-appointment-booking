@@ -74,7 +74,7 @@ twilio-ai-assistant/
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/twilio-samples/ai-assistant-demo-owl-shoes.git
+git clone https://github.com/nmogil-tw/ai-assistant-appointment-booking.git
 cd ai-assistant-demo-owl-shoes
 ```
 
